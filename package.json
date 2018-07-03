@@ -4,8 +4,8 @@
   "description": "market",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --config build/webpack.config.js --mode development",
-    "build": "webpack --config build/webpack.config.js --mode production"
+    "dev": "webpack-dev-server --base ./dist --open --inline --hot --compress --config build/webpack.base.config.js --mode development",
+    "build": "webpack --config build/webpack.base.config.js --mode production"
   },
   "author": "Anani",
   "license": "MIT",
