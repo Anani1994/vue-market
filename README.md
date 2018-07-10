@@ -1,6 +1,6 @@
 # Vue-market
 
-> Commercial City Project Based on Vue
+Commercial City Project Based on Vue
 
 #### Build Setup
 
@@ -18,9 +18,9 @@ npm run build
 
 ---
 
-#### 联系我：
+#### Contact me:
 * Author : [@Anani][1]
-* Blog：[Anani-博客园][2]
+* Blog：[Anani-cnblogs][2]
 * Contact me ：[Email][3]
 
 [1]: https://weibo.com/dongwanhong
