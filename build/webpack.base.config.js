@@ -1,3 +1,4 @@
+// 修改 webppack 配置文件后需重启才能生效
 const path = require('path'); // node.js 中的基本包，用于处理路径
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
@@ -15,11 +16,21 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.vue$/,
-        loader: 'vue-loader'
+        test: /\.vue$/,
+        use: [
+          {
+            loader: 'vue-loader'
+          },
+          {
+            loader: 'iview-loader',
+            options: {
+              prefix: false
+            }
+          }
+        ]
       },
       {
-        test: /.css$/,
+        test: /\.css$/,
         use: [
           'style-loader', // 为 css 创建 style 标签并置入其中插入页面
           'css-loader', // 处理 css
@@ -54,6 +65,18 @@ module.exports = {
             loader: 'url-loader',
             options: { // 配置参数
               limit: 1024 // 比较标准，小于标准的图片转换为 base64 代码
+            }
+          }
+        ]
+      },
+      // 管理字体文件
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          {
+            loader:'file-loader',
+            options:{
+              name:'img/[name].[hash:8].[ext]'
             }
           }
         ]
