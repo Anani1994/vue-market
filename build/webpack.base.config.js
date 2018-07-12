@@ -1,17 +1,13 @@
 // 修改 webppack 配置文件后需重启才能生效
 const path = require('path'); // node.js 中的基本包，用于处理路径
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname,'../src/main.js'), // path.jion()将两个参数代表的路径相加组合起来，__dirname代表当前文件所在目录
-  devtool: 'cheap-module-eval-source-map', // devtool由webpack直接提高，将打包后的文件中的错误映射到最初对应的文件中，便于调试
-  devServer: {
-    
-  },
   output: {
     filename: 'bundle.js', //输出文件的文件名
-    path: path.join(__dirname,'../dist') // 输出文件所在目录
+    path: path.join(__dirname,'../dist'), // 输出文件所在目录
+    // publicPath: ''
   },
   module: {
     rules: [
@@ -86,9 +82,5 @@ module.exports = {
   plugins: [
     // Vue-loader在15.*之后的版本都是 vue-loader的使用都是需要伴生 VueLoaderPlugin的
     new VueLoaderPlugin(),
-    new HTMLWebpackPlugin({ //创建 .html 并自动引入打包后的文件
-      template: 'index.html',
-      inject: true // 参照最初创建的 .html 来生成 .html
-    })
   ]
 }
