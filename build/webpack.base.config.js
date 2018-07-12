@@ -5,7 +5,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
   entry: path.join(__dirname,'../src/main.js'), // path.jion()将两个参数代表的路径相加组合起来，__dirname代表当前文件所在目录
   output: {
-    filename: 'bundle.js', //输出文件的文件名
+    // filename: 'bundle.js', //输出文件的文件名
     path: path.join(__dirname,'../dist'), // 输出文件所在目录
     // publicPath: ''
   },
