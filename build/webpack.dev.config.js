@@ -7,9 +7,9 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 module.exports = webpackMerge(webpackBaseConfig,{
   mode: 'development',
   output: {
-    //   publicPath: '/dist/',
-    //   filename: '[name].js',
-    //   chunkFilename: '[name].chunk.js'
+      publicPath: '/',
+      filename: '[hash].js',
+      chunkFilename: '[hash].chunk.js'
   },
   devServer: {
        contentBase: path.join(__dirname, "dist"),
