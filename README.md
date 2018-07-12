@@ -2,13 +2,15 @@
 
 Commercial City Project Based on Vue
 
+<code>node v8.9.1</code> &nbsp; <code>yarn v1.7.0</code> &nbsp; <code>OS macOS</code>
+
 #### Build Setup
 
 ``` bash
 # install dependencies
 yarn install
 
-# serve with hot reload at localhost:9080
+# serve with hot reload at 0.0.0.0:8081
 yarn run dev
 
 # build electron application for production
