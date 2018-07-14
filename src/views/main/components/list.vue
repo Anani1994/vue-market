@@ -37,6 +37,9 @@ export default {
     margin: 10px .5%;
     width: 24%;
     float: left;
+    .img-goods {
+        
+    }
 }
 </style>
 
