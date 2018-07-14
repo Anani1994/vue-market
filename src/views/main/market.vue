@@ -37,6 +37,7 @@
             :key="index"
             :id="goodsList.id"
             :goodsList="goodsList"></List>
+        <div v-if="!this.filteredGoodsList.length">暂无该类型商品</div>
     </div>
 </template>
 
@@ -67,7 +68,22 @@ export default {
         },
         filteredGoodsList () {
             let list = this.$store.state.goodsList;
-            return list;
+            if(this.searchVal !== '') {
+                return list = list.filter(item => item.title.includes(this.searchVal)
+                       || item.color.includes(this.searchVal)
+                       || item.brand.includes(this.searchVal));
+            }else {
+                if(this.filterBrand !== '全部') {
+                    list = list.filter(item => item.brand === this.filterBrand);
+                }
+                if(this.filterSize !== '全部') {
+                    list = list.filter(item => item.size === this.filterSize);
+                }
+                if(this.filterColor !== '全部') {
+                    list = list.filter(item => item.color === this.filterColor);
+                }
+                return list;
+            }
         }
     },
     methods: {
@@ -83,7 +99,7 @@ export default {
         },
         handleFilterColor (item) {
             if(item !== this.filterColor) {
-                this.filterSize = item;
+                this.filterColor = item;
             }
         }
     },
