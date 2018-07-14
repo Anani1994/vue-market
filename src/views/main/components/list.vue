@@ -2,16 +2,12 @@
     <div class="goods">
         <!-- <router-link> -->
             <Card>
-                <div class="img-goods">
-                    <img :src="goodsList.src" />
+                <img :src="goodsList.src" />
+                <div class="d-flex space-between num-goods">
+                    <span class="price-goods">{{ goodsList.price }}</span>
+                    <span class="num-sell-goods">{{ goodsList.num }}</span>
                 </div>
-                <div class="des-goods">
-                    <div>
-                        <span class="price-goods">{{ goodsList.price }}</span>
-                        <span class="num-sell-goods">{{ goodsList.num }}</span>
-                    </div>
-                    <div class="title-goods">{{ goodsList.title }}</div>
-                </div>
+                <div class="title-goods">{{ goodsList.title }}</div>
             </Card>
         <!-- </router-link> -->
     </div>
@@ -37,8 +33,13 @@ export default {
     margin: 10px .5%;
     width: 24%;
     float: left;
-    .img-goods {
-        
+    img {
+        display: block;
+        height: 150px;
+        margin: 0 auto;
+    }
+    .num-goods {
+        margin: 10px;
     }
 }
 </style>
