@@ -1,5 +1,5 @@
 <template>
-    <div class="market">
+    <div class="market clear-fix">
         <div>
             <span>品牌：</span>
             <span
