@@ -4,6 +4,7 @@ const webpackBaseConfig = require('./webpack.base.config');
 const webpackMerge = require('webpack-merge');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const cleanWebpackPlugin = require('clean-webpack-plugin'); // 用于清除目录内容
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 用于提取 css，尚未安装
 
 module.exports = webpackMerge(webpackBaseConfig,{
   mode: 'production',

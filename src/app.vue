@@ -1,5 +1,29 @@
+<style lang="less">
+    @import './assets/style/main.less';
+</style>
+
 <template>
     <div class="main">
+        <Menu mode="horizontal" theme="dark" active-name="index">
+            <Row>
+                <Col span="8">
+                    <MenuItem name="index">
+                        <Icon type="android-globe"></Icon>
+                        市场
+                    </MenuItem>
+                </Col>
+                <Col span="16">
+                    <MenuItem name="car" style="float: right;">
+                        <Icon type="android-cart"></Icon>
+                        购物车
+                    </MenuItem>
+                    <MenuItem name="car" style="float: right;">
+                        <Icon type="person"></Icon>
+                        登录
+                    </MenuItem>
+                </Col>
+            </Row>
+        </Menu>
         <router-view></router-view>
     </div>
 </template>
@@ -12,18 +36,3 @@ export default {
     }
 }
 </script>
-
-<style lang=less>
-html,body {
-    * {
-        margin: 0;
-        padding: 0;
-    }
-    width: 100%;
-    height: 100%;
-    .main {
-        width: 100%;
-        height: 100%;
-    }
-}
-</style>

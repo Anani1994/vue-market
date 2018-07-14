@@ -1,4 +1,4 @@
-import Main from '../views/main/main.vue';
+import Main from '../views/main/market.vue';
 
 export const pageIndex = {
     path: '/',
