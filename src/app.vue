@@ -7,10 +7,12 @@
         <Menu mode="horizontal" theme="dark" active-name="index">
             <Row>
                 <Col span="8">
-                    <MenuItem name="index">
-                        <Icon type="android-globe"></Icon>
-                        市场
-                    </MenuItem>
+                    <router-link to="/">
+                        <MenuItem name="index">
+                            <Icon type="android-globe"></Icon>
+                            市场
+                        </MenuItem>
+                    </router-link>
                 </Col>
                 <Col span="16">
                     <MenuItem name="car" style="float: right;">
