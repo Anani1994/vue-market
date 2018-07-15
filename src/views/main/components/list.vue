@@ -1,15 +1,15 @@
 <template>
     <div class="goods">
-        <!-- <router-link> -->
+        <router-link :to="'/goods/' + goodsList.id">
             <Card>
                 <img :src="goodsList.src" />
                 <div class="d-flex space-between num-goods">
-                    <span class="price-goods">{{ goodsList.price }}</span>
-                    <span class="num-sell-goods">{{ goodsList.num }}</span>
+                    <span class="price-goods">${{ goodsList.price }}</span>
+                    <span class="num-sell-goods">已售{{ goodsList.num }}</span>
                 </div>
                 <div class="title-goods">{{ goodsList.title }}</div>
             </Card>
-        <!-- </router-link> -->
+        </router-link>
     </div>
 </template>
 

@@ -3,7 +3,8 @@ const path = require('path'); // node.js 中的基本包，用于处理路径
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-  entry: path.join(__dirname,'../src/main.js'), // path.jion()将两个参数代表的路径相加组合起来，__dirname代表当前文件所在目录
+  // path.jion()将两个参数代表的路径相加组合起来，__dirname代表当前文件所在目录
+  entry: path.join(__dirname,'../src/main.js'),
   output: {
     // filename: 'bundle.js', //输出文件的文件名
     path: path.join(__dirname,'../dist'), // 输出文件所在目录
@@ -28,9 +29,12 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader', // 为 css 创建 style 标签并置入其中插入页面
-          'css-loader', // 处理 css
-          'postcss-loader', // 浏览器兼容问题
+          // 为 css 创建 style 标签并置入其中插入页面
+          'style-loader',
+          // 处理 css
+          'css-loader',
+          // 浏览器兼容问题
+          'postcss-loader',
         ]
       },
       {
@@ -39,17 +43,20 @@ module.exports = {
           'style-loader',
           'css-loader',
           'postcss-loader',
-          'less-loader' // loader 由下往上依次开始处理
+          'less-loader'
+          // loader 由下往上依次开始处理
         ]
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: /(node_modules|bower_components)/,
         use: [
           {
             loader: 'babel-loader',
             options: {
-              presets: ['env']
+              presets: ['env'],
+              // 前者防止在每个文件都插入辅助代码 后者支持路由懒加载
+              plugins: ['transform-runtime','syntax-dynamic-import']
             }
           }
         ]
@@ -59,8 +66,10 @@ module.exports = {
         use: [
           {
             loader: 'url-loader',
-            options: { // 配置参数
-              limit: 1024 // 比较标准，小于标准的图片转换为 base64 代码
+            // 配置参数
+            options: { 
+              // 比较标准，小于标准的图片转换为 base64 代码
+              limit: 1024 
             }
           }
         ]
