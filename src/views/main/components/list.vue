@@ -1,13 +1,13 @@
 <template>
-    <div class="goods">
+    <div class="list">
         <router-link :to="'/goods/' + goodsList.id">
             <Card>
                 <img :src="goodsList.src" />
-                <div class="d-flex space-between num-goods">
-                    <span class="price-goods">${{ goodsList.price }}</span>
-                    <span class="num-sell-goods">已售{{ goodsList.num }}</span>
+                <div class="d-flex justify-between num-goods">
+                    <span class="color-error">${{ goodsList.price }}</span>
+                    <span class="color-success">已售{{ goodsList.num }}</span>
                 </div>
-                <div class="title-goods">{{ goodsList.title }}</div>
+                <div class="color-content">{{ goodsList.title }}</div>
             </Card>
         </router-link>
     </div>
@@ -29,7 +29,7 @@ export default {
 
 
 <style lang="less">
-.goods {
+.list {
     margin: 10px .5%;
     width: 24%;
     float: left;
