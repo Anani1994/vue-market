@@ -11,11 +11,7 @@ module.exports = webpackMerge(webpackBaseConfig,{
   output: {
       publicPath: 'https://.../dist/', // https://...这部分为你的服务器域名
       filename: '[hash].js',
-<<<<<<< HEAD
       // chunkFilename: '[hash].chunk.js'
-=======
-      chunkFilename: '[hash].chunk.js'
->>>>>>> 6e9d8070f73079cad46747d7270b5edc7e3bd119
   },
   plugins: [
     // 打包之前使用这个插件尝试清除dist目录下的文件
