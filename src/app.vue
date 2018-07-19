@@ -15,12 +15,19 @@
                     </router-link>
                 </Col>
                 <Col span="16">
+<<<<<<< HEAD
                     <router-link to="/cart">
                         <MenuItem name="car" style="float: right;">
                             <Icon type="android-cart"></Icon>
                             购物车
                         </MenuItem>
                     </router-link>
+=======
+                    <MenuItem name="car" style="float: right;">
+                        <Icon type="android-cart"></Icon>
+                        购物车
+                    </MenuItem>
+>>>>>>> 6e9d8070f73079cad46747d7270b5edc7e3bd119
                     <MenuItem name="car" style="float: right;">
                         <Icon type="person"></Icon>
                         登录

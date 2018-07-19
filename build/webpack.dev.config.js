@@ -9,7 +9,11 @@ module.exports = webpackMerge(webpackBaseConfig,{
   output: {
       publicPath: '/',
       filename: '[hash].js',
+<<<<<<< HEAD
       // chunkFilename: '[hash].chunk.js'
+=======
+      chunkFilename: '[hash].chunk.js'
+>>>>>>> 6e9d8070f73079cad46747d7270b5edc7e3bd119
   },
   devServer: {
        contentBase: path.join(__dirname, "dist"),
