@@ -8,7 +8,11 @@
                 <h2 class="title-goods">{{ goods.title }}</h2>
                 <p>品牌： {{ goods.brand }}</p>
                 <p class="color-error">单价： {{ goods.price }}元</p>
-                <Button class="buy-button position-absolute" type="error" long>加入购物车 </Button>
+                <Button 
+                    class="buy-button position-absolute" 
+                    type="error" 
+                    long
+                    @click="addCartGoods">加入购物车 </Button>
             </div>
         </Col>
     </Row>
@@ -29,6 +33,10 @@ export default {
         getGoodsInfo () {
             // 真实环境改为 ajax 获取
             this.goods = goodses.find(item => item.id === this.id);
+        },
+        addCartGoods () {
+            this.$store.dispatch('addCartGoods',{id : this.id}).then(() => this.$Message.success('成功加入购物车'))
+                                                         .catch(err => this.$Message.error(err));
         }
     },
     mounted () {

@@ -1,11 +1,16 @@
 <template>
-<div class="cart">
-    <Table
-        border 
-        :columns="columnsDes" 
-        :data="testCart">
-    </Table>
-</div>
+    <div class="cart">
+        <Table
+            border
+            ref="goodsSelection" 
+            :columns="columnsDes" 
+            :data="testCart"
+            :no-data-text="noDataText">
+        </Table>
+        <Button @click="handleSelectAll(true)">商品全选</Button>
+        <Button @click="handleSelectAll(false)">取消全选</Button>
+        共计 {{ totalCount }} 件商品 应付 {{ totalPriceEst }} 元
+    </div>
 </template>
 <script>
     export default {
@@ -13,26 +18,73 @@
             return {
                 columnsDes: [
                     {
+                        type: 'selection',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
                         title: '商品信息',
-                        key: 'name',
+                        key: 'title',
+                        ellipsis: true,
                         render: (h, params) => {
                             return h('div', [
-                                h('Icon', {
+                                h('img', {
                                     props: {
-                                        type: 'person'
+                                        src: params.row.src
                                     }
                                 }),
-                                h('strong', params.row.name)
+                                h('strong', params.row.title)
                             ]);
                         }
                     },
                     {
-                        title: 'Price',
-                        key: 'price'
+                        title: '单价',
+                        key: 'price',
                     },
                     {
-                        title: 'Address',
-                        key: 'address'
+                        title: '数量',
+                        key: 'count',
+                        align: 'center',
+                        render: (h,params) => {
+                            return h('div',[
+                                h('Icon',{
+                                    props: {
+                                        type: 'plus-circled'
+                                    },
+                                    style: {
+                                        marginRight: '10px'
+                                    },
+                                    on: {
+                                        click: () => params.row.count += 1
+                                    }
+                                }),
+                                h('span',params.row.count),
+                                h('Icon',{
+                                    props: {
+                                        type: 'minus-circled'
+                                    },
+                                    style: {
+                                        marginLeft: '10px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            if(params.row.count >1) {
+                                                params.row.count -= 1
+                                            }else {
+                                                this.$Message.warning('商品数量不能再减少了')
+                                            }
+                                        }
+                                    }
+                                })
+                            ])
+                        }
+                    },
+                    {
+                        title: '小记',
+                        key: 'totalPrice',
+                        render: (h,params) => {
+                            return h('span',params.row.price * params.row.count)
+                        }
                     },
                     {
                         title: 'Action',
@@ -70,40 +122,32 @@
                         }
                     }
                 ],
-                testCart: [
-                    {
-                        name: 'img + title',
-                        price: 18,
-                        address: 'New York No. 1 Lake Park'
-                    },
-                    {
-                        name: 'Jim Green',
-                        price: 24,
-                        address: 'London No. 1 Lake Park'
-                    },
-                    {
-                        name: 'Joe Black',
-                        price: 30,
-                        address: 'Sydney No. 1 Lake Park'
-                    },
-                    {
-                        name: 'Jon Snow',
-                        price: 26,
-                        address: 'Ottawa No. 2 Lake Park'
-                    }
-                ]
+                totalPriceEst: 0,
+                totalCount: 0,
+                noDataText: '购物车居然是空的，赶快去商场选购吧'
+            }
+        },
+        computed: {
+            testCart() {
+                return this.$store.state.cartList;
             }
         },
         methods: {
             show (index) {
                 this.$Modal.info({
-                    title: 'User Info',
-                    content: `Name：${this.testCart[index].name}<br>Age：${this.testCart[index].price}<br>Address：${this.testCart[index].address}`
+                    title: '商品详细信息',
+                    content: `商品名称：${this.testCart[index].title}<br>单价：${this.testCart[index].price}`
                 })
             },
             remove (index) {
                 this.testCart.splice(index, 1);
+            },
+            handleSelectAll (status) {
+                this.$refs.goodsSelection.selectAll(status);
             }
+        },
+        mounted() {
+            this.$store.dispatch('getCart');
         }
     }
 </script>

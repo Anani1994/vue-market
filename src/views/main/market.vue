@@ -105,6 +105,7 @@ export default {
     },
     mounted () {
         this.$store.dispatch('getGoodsList');
+        this.$store.dispatch('getCart');
     }
 }
 </script>
