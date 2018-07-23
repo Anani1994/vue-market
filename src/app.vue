@@ -17,8 +17,10 @@
                 <Col span="16">
                     <router-link to="/cart">
                         <MenuItem name="car" style="float: right;">
-                            <Icon type="android-cart"></Icon>
-                            购物车
+                            <Badge :count="this.count">
+                                <Icon type="android-cart"></Icon>
+                                <span style="padding-right:11px;">购物车</span>
+                            </Badge>
                         </MenuItem>
                     </router-link>
                     <MenuItem name="car" style="float: right;">
@@ -36,6 +38,11 @@
 export default {
     data() {
         return {
+        }
+    },
+    computed: {
+        count() {
+            return this.$store.state.cartList.length;
         }
     }
 }

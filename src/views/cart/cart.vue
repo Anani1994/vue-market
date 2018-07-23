@@ -5,11 +5,21 @@
             ref="goodsSelection" 
             :columns="columnsDes" 
             :data="testCart"
-            :no-data-text="noDataText">
+            :no-data-text="noDataText"
+            @on-selection-change="handleSelectChange">
         </Table>
-        <Button @click="handleSelectAll(true)">商品全选</Button>
-        <Button @click="handleSelectAll(false)">取消全选</Button>
-        共计 {{ totalCount }} 件商品 应付 {{ totalPriceEst }} 元
+        <div class="select-button" v-if="testCart.length">
+            <Button @click="handleSelectAll(true)">商品全选</Button>
+            <Button @click="handleSelectAll(false)">取消全选</Button>
+        </div>
+        <div class="result-price" v-if="testCart.length">
+            已选中
+            <span class="color-error"> {{ totalCount }} </span>
+            件商品 应付
+            <span class="color-error"> {{ totalPriceEst }} </span>
+            元
+            <Button type="primary" @click="checkOut">现在结算</Button>
+        </div>
     </div>
 </template>
 <script>
@@ -55,7 +65,11 @@
                                         marginRight: '10px'
                                     },
                                     on: {
-                                        click: () => params.row.count += 1
+                                        click: () => {
+                                            this.totalCount = 0;
+                                            this.totalPriceEst = 0;
+                                            this.$store.dispatch('addCartGoods',{id: params.row.id}).then(() => params.row.count += 1);
+                                        }
                                     }
                                 }),
                                 h('span',params.row.count),
@@ -68,11 +82,15 @@
                                     },
                                     on: {
                                         click: () => {
-                                            if(params.row.count >1) {
-                                                params.row.count -= 1
-                                            }else {
-                                                this.$Message.warning('商品数量不能再减少了')
-                                            }
+                                            this.totalCount = 0;
+                                            this.totalPriceEst = 0;
+                                            this.$store.dispatch('reduceCartGoods',{id: params.row.id}).then(data => {
+                                                if(data === 0) {
+                                                    this.$Message.warning('商品数量不能再减少了'); 
+                                                }else {
+                                                    params.row.count -= 1
+                                                }
+                                            });
                                         }
                                     }
                                 })
@@ -114,7 +132,8 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.remove(params.index)
+                                            this.$store.dispatch('removeCartGoods',{id: params.row.id});
+                                            
                                         }
                                     }
                                 }, 'Delete')
@@ -123,8 +142,9 @@
                     }
                 ],
                 totalPriceEst: 0,
-                totalCount: 0,
-                noDataText: '购物车居然是空的，赶快去商场选购吧'
+                totalCount: '0',
+                noDataText: '购物车居然是空的，赶快去商场选购吧',
+                selected: []
             }
         },
         computed: {
@@ -139,11 +159,23 @@
                     content: `商品名称：${this.testCart[index].title}<br>单价：${this.testCart[index].price}`
                 })
             },
-            remove (index) {
-                this.testCart.splice(index, 1);
-            },
             handleSelectAll (status) {
                 this.$refs.goodsSelection.selectAll(status);
+            },
+            handleSelectChange(selection) {
+                this.selected = selection;
+                this.totalCount = selection.reduce((total,item) => total + item.count,0);
+                this.totalPriceEst = selection.reduce((total,item) => total + item.price * item.count,0);
+            },
+            checkOut() {
+                let selectedID = [];
+                this.selected.forEach(item => selectedID.push(item.id));
+                if(selectedID.length < 1) {
+                    this.$Message.error('请先选择您要购买的商品');
+                    
+                }else {
+                    this.$store.dispatch('buySelected',{id: selectedID});
+                }
             }
         },
         mounted() {
@@ -155,6 +187,15 @@
 .cart {
     margin: 10px auto;
     width: 99%;
+    .select-button {
+        padding: 2rem 1rem;
+        float: left;
+    }
+    .result-price {
+        padding: 5rem 3rem 2rem 1rem;
+        float: right;
+        font-size: 1rem;
+    }
 }
 </style>
 
