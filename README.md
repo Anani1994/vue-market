@@ -13,7 +13,7 @@ yarn install
 # serve with hot reload at 127.0.0.1:8081
 yarn run dev
 
-# build electron application for production
+# run production
 yarn run build
 
 ```
