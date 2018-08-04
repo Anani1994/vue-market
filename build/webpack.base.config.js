@@ -69,7 +69,8 @@ module.exports = {
             // 配置参数
             options: { 
               // 比较标准，小于标准的图片转换为 base64 代码
-              limit: 1024 
+              limit: 1024 ,
+              name:'dist/img/[name].[hash:8].[ext]'
             }
           }
         ]
@@ -81,7 +82,7 @@ module.exports = {
           {
             loader:'file-loader',
             options:{
-              name:'img/[name].[hash:8].[ext]'
+              name:'dist/img/[name].[hash:8].[ext]'
             }
           }
         ]

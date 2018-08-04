@@ -9,8 +9,8 @@ const cleanWebpackPlugin = require('clean-webpack-plugin'); // 用于清除目�
 module.exports = webpackMerge(webpackBaseConfig,{
   mode: 'production',
   output: {
-      publicPath: 'https://.../dist/', // https://...这部分为你的服务器域名
-      filename: '[hash].js',
+      // publicPath: 'https://.../dist/', // https://...这部分为你的服务器域名
+      filename: 'dist/[hash].js',
       // chunkFilename: '[hash].chunk.js'
   },
   plugins: [
