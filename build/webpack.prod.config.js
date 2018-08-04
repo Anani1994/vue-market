@@ -10,7 +10,7 @@ module.exports = webpackMerge(webpackBaseConfig,{
   mode: 'production',
   output: {
       // publicPath: 'https://.../dist/', // https://...这部分为你的服务器域名
-      filename: 'dist/[hash].js',
+      filename: 'js/[hash].js',
       // chunkFilename: '[hash].chunk.js'
   },
   plugins: [
