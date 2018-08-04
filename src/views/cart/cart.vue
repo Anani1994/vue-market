@@ -39,11 +39,21 @@
                         render: (h, params) => {
                             return h('div', [
                                 h('img', {
-                                    props: {
+                                    domProps: {
                                         src: params.row.src
+                                    },
+                                    style: {
+                                        width: '50px',
+                                        height: '50px',
+                                        verticalAlign: 'middle'
                                     }
                                 }),
-                                h('strong', params.row.title)
+                                h('div', {
+                                    style: {
+                                        display: 'inline-block',
+                                        lineHeight: '50px'
+                                    }
+                                }, params.row.title)
                             ]);
                         }
                     },
@@ -124,7 +134,7 @@
                                             this.show(params.index)
                                         }
                                     }
-                                }, 'View'),
+                                }, '查看'),
                                 h('Button', {
                                     props: {
                                         type: 'error',
@@ -136,7 +146,7 @@
                                             
                                         }
                                     }
-                                }, 'Delete')
+                                }, '删除')
                             ]);
                         }
                     }
@@ -156,7 +166,9 @@
             show (index) {
                 this.$Modal.info({
                     title: '商品详细信息',
-                    content: `商品名称：${this.testCart[index].title}<br>单价：${this.testCart[index].price}`
+                    content: `<p>商品名称：${this.testCart[index].title}</p>
+                              <p>单价：${this.testCart[index].price}</p>
+                              <img src="${this.testCart[index].src}">`
                 })
             },
             handleSelectAll (status) {

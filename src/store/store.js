@@ -9,6 +9,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
+        showNav: false,
         goodsList: [],
         cartList: []
     },
@@ -43,6 +44,9 @@ const store = new Vuex.Store({
                 state.cartList.splice(state.cartList.findIndex(item => item.id === data.id[i]),1);
             }
             iview.Message.success('购买成功');
+        },
+        toggleNav(state) {
+            state.showNav = !state.showNav;
         }
     },
     actions: {

@@ -19,7 +19,17 @@ export const router = new VueRouter(routerConfig);
 router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
     title(to.meta.title);
-    next();
+    if (!sessionStorage.user) {
+        if (to.name === 'login') {
+            next();
+        } else {
+            next({
+                name: 'login'
+            })
+        }
+    } else {
+        next();
+    }
 });
 
 // 全局后置钩子

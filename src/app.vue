@@ -4,10 +4,10 @@
 
 <template>
     <div class="main">
-        <Menu mode="horizontal" theme="dark" active-name="index">
+        <Menu v-if="showNav" mode="horizontal" theme="dark" active-name="index">
             <Row>
                 <Col span="8">
-                    <router-link to="/">
+                    <router-link to="/index">
                         <MenuItem name="index">
                             <Icon type="android-globe"></Icon>
                             市场
@@ -23,9 +23,9 @@
                             </Badge>
                         </MenuItem>
                     </router-link>
-                    <MenuItem name="car" style="float: right;">
+                    <MenuItem name="login" @click.native="handleLoginOut" style="float: right;">
                         <Icon type="person"></Icon>
-                        登录
+                        退出
                     </MenuItem>
                 </Col>
             </Row>
@@ -40,9 +40,21 @@ export default {
         return {
         }
     },
+    methods: {
+        handleLoginOut() {
+            sessionStorage.clear();
+            this.$store.commit('toggleNav');
+            this.$router.push({
+                name: 'login'
+            })
+        }
+    },
     computed: {
         count() {
             return this.$store.state.cartList.length;
+        },
+        showNav() {
+            return this.$store.state.showNav;
         }
     }
 }
